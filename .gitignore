@@ -3,3 +3,4 @@
 data/raw/
 data/processed/
 data/cleaned/
+notebooks/.ipynb_checkpoints
