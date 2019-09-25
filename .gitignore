@@ -1,6 +1,8 @@
 .gitattributes
 .insta-credentials
-data/raw/
-data/processed/
-data/cleaned/
+data/raw
+data/processed
+data/cleaned
 notebooks/.ipynb_checkpoints
+*__pycache__*
+tatrec/static/img/uploads
