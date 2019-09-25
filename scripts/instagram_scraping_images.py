@@ -3,65 +3,13 @@ import random
 import time
 import os
 from typing import Union
-from instaloader import Instaloader, Profile, ProfileNotExistsException, ConnectionException
+from instaloader import Instaloader, ProfileNotExistsException, ConnectionException
 from pathlib import Path
-
-# Change if the data directory or script directories change
-data_dir = Path("/Users/bigtyme/data/raw/instagram")
-script_dir = Path("/Users/bigtyme/Dropbox/Insight/tatrec/scripts/")
-
-# Load instagram credentials from file to hide from repository (only loads first credentials)
-with open(script_dir / ".insta-credentials") as csvfile:
-    account_reader = csv.reader(csvfile, delimiter=',')
-    first_row = next(account_reader)
-    insta_user = first_row[0]
-    insta_pass = first_row[1]
-
-
-def scrape_instagram_profile_posts(session: Instaloader, profile: str, max_posts: int = 50) -> None:
-    """Scrapes specified number of posts from an instagram profile and save in the current working
-    directory.
-
-    Args
-    ----------
-    profile : instaloader Profile of specific public Instagram user id
-    number : maximum number of posts to extract (can have multiple images per post)
-
-    Returns
-    -------
-    None
-
-    """
-    counter = 0
-    profile = Profile.from_username(session.context, profile)
-    for post in profile.get_posts():
-        session.download_post(post, target=profile.username)
-        counter += 1
-        if counter == max_posts:
-            break
-
-
-def scrape_instagram_hashtag_posts(session: Instaloader, hashtag: str, max_posts: int = 50) -> None:
-    """Scrapes specified number of posts from an instagram profile and save in the current working
-    directory.
-
-    Args
-    ----------
-    profile : instaloader Profile of specific public Instagram user id
-    number : maximum number of posts to extract (can have multiple images per post)
-
-    Returns
-    -------
-    None
-
-    """
-    counter = 0
-    profile = Profile.from_username(session.context, hashtag)
-    for post in profile.get_posts():
-        session.download_post(post, target=profile.username)
-        counter += 1
-        if counter == max_posts:
-            break
+import sys
+# Ensure tatrec package is in the path
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "tatrec"))
+from tatrec.config import path_raw_chicago, path_scripts
+from tatrec.custom_funcs import scrape_instagram_profile_posts, get_insta_creds
 
 
 def scrape_artists_from_file(filename_artists: Union[Path, str], save_path: Union[Path, str],
@@ -81,7 +29,7 @@ def scrape_artists_from_file(filename_artists: Union[Path, str], save_path: Unio
 
     """
     # Load artists instagram handles from file
-    with open(script_dir / filename_artists) as csvfile:
+    with open(path_scripts / filename_artists) as csvfile:
         artist_reader = csv.reader(csvfile, delimiter=delimiter)
         # (# at beginning of artist name means artist already dl'ed)
         artist_names = [artist[0]
@@ -93,6 +41,7 @@ def scrape_artists_from_file(filename_artists: Union[Path, str], save_path: Unio
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     os.chdir(save_path)
+    print(save_path)
 
     # Setup the scraper and only download images, tags, and text from posts
     insta_sess = Instaloader(quiet=True, download_comments=False, download_pictures=True,
@@ -100,6 +49,7 @@ def scrape_artists_from_file(filename_artists: Union[Path, str], save_path: Unio
                              download_geotags=False)
     # login using load session file by running: instaloader -l username from command line and
     # inputting password
+    insta_user, insta_pass = get_insta_creds(path_scripts / ".insta-credentials")
     insta_sess.login(insta_user, insta_pass)
     # insta_sess.load_session_from_file("Mspencer02")
 
@@ -118,4 +68,4 @@ def scrape_artists_from_file(filename_artists: Union[Path, str], save_path: Unio
     os.chdir(cur_wd)
 
 
-scrape_artists_from_file("chicago_artists.csv", Path(data_dir / "test/"))
+scrape_artists_from_file("chicago_artists.csv", Path(path_raw_chicago))
