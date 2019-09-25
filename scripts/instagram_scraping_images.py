@@ -9,7 +9,7 @@ import sys
 # Ensure tatrec package is in the path
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "tatrec"))
 from tatrec.config import path_raw_chicago, path_scripts
-from tatrec.custom_funcs import scrape_instagram_profile_posts, get_insta_creds
+from tatrec.scraping_funcs import scrape_instagram_profile_posts, get_insta_creds
 
 
 def scrape_artists_from_file(filename_artists: Union[Path, str], save_path: Union[Path, str],
