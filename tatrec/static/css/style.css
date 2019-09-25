@@ -60,15 +60,15 @@ ol {
   Helper css
 --------------------------*/
 .body-pad {
-  padding: 0 40px;
+  padding: 0 10px;
 }
 
 .spad {
-  padding: 100px 0;
+  padding: 20px 0;
 }
 
 .pt100 {
-  padding-top: 100px;
+  padding-top: 20px;
 }
 
 .set-bg {
@@ -77,7 +77,7 @@ ol {
 }
 
 .section-title {
-  font-size: 60px;
+  font-size: 20px;
 }
 
 .section-title span {
@@ -88,7 +88,7 @@ ol {
   Common Elements
 --------------------------*/
 .element {
-  margin-bottom: 100px;
+  margin-bottom: 20px;
 }
 
 .element:last-child {
@@ -107,8 +107,8 @@ ol {
 }
 
 .loader {
-  width: 30px;
-  height: 30px;
+  width: 10px;
+  height: 10px;
   border: 3px solid #000;
   position: absolute;
   top: 50%;
@@ -195,7 +195,7 @@ ol {
 
 /*===  Accordion  ===*/
 .accordion-area .panel {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .accordion-area .panel-header {
@@ -203,7 +203,7 @@ ol {
   color: #fff;
   display: block;
   padding: 12px 50px;
-  padding-left: 30px;
+  padding-left: 10px;
   font-size: 14px;
   font-weight: 600;
   position: relative;
@@ -352,8 +352,8 @@ ol {
     Header Section
 --------------------------*/
 .header-section {
-  padding-top: 30px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   position: relative;
 }
 
@@ -404,13 +404,13 @@ ol {
 
 .portfolio-filter {
   list-style: none;
-  padding-bottom: 100px;
+  padding-bottom: 20px;
 }
 
 .portfolio-filter li {
   font-size: 16px;
   display: inline-block;
-  margin-right: 30px;
+  margin-right: 10px;
   padding-bottom: 10px;
   color: #979797;
   cursor: pointer;
@@ -434,7 +434,7 @@ ol {
   height: 600px;
   background-position: center center;
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .portfolio-item .pi-inner {
@@ -451,7 +451,7 @@ ol {
 
 .portfolio-item .pi-inner h2 {
   opacity: 0;
-  font-size: 30px;
+  font-size: 10px;
   font-weight: 400;
   position: absolute;
   left: 50px;
@@ -473,7 +473,7 @@ ol {
 }
 
 .portfolio-meta {
-  padding-bottom: 45px;
+  padding-bottom: 10px;
 }
 
 .portfolio-meta h2 {
@@ -511,7 +511,7 @@ ol {
     Footer Section
 --------------------------*/
 .footer-section {
-  padding: 110px 0;
+  padding: 30px 0;
 }
 
 .footer-section .copyright {
@@ -520,14 +520,14 @@ ol {
 }
 
 .social-links {
-  margin-top: 60px;
-  margin-bottom: 40px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 .social-links a {
   color: #979797;
   font-size: 15px;
-  margin-right: 30px;
+  margin-right: 10px;
 }
 
 .social-links a:last-child {
@@ -595,7 +595,7 @@ ol {
 }
 
 .thumb {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .blog-content h2 {
@@ -606,11 +606,11 @@ ol {
 .blog-content .blog-meta {
   font-size: 13px;
   color: #979797;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .blog-content p {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 /*------------------------
@@ -623,7 +623,7 @@ ol {
 
 .contect-tect h2 {
   font-size: 24px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .contect-tect p {
@@ -641,7 +641,7 @@ ol {
   width: 100%;
   border: none;
   border-bottom: 2px solid #000;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   font-size: 12px;
 }
 
@@ -651,7 +651,7 @@ ol {
   width: 100%;
   border: none;
   border-bottom: 2px solid #000;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   font-size: 12px;
 }
 
@@ -690,7 +690,7 @@ ol {
 /* Tablet :768px. */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .body-pad {
-    padding: 0 30px;
+    padding: 0 10px;
   }
   .portfolio-item {
     height: 350px;
@@ -708,7 +708,7 @@ ol {
     width: 100%;
     z-index: 999;
     left: 0;
-    top: 30px;
+    top: 10px;
     padding-top: 15px;
     display: none;
   }
@@ -732,7 +732,7 @@ ol {
   .nav-switch {
     position: absolute;
     right: 25px;
-    font-size: 30px;
+    font-size: 10px;
     color: #333;
     top: 35px;
     display: block;
@@ -751,6 +751,6 @@ ol {
 /* small Mobile :320px. */
 @media only screen and (max-width: 479px) {
   .section-title {
-    font-size: 30px;
+    font-size: 10px;
   }
 }
