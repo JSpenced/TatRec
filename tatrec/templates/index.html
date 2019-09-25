@@ -55,26 +55,48 @@
 	<!-- header section end -->
 
 
+	<!-- image upload section start -->
+	<section class="image-section pt100">
+        <div class="container">
+            <form method="post" enctype="multipart/form-data" action="recommendations">
+                <input class="btn btn-warning" id="img" name="file" type="file" accept=".jpeg,.jpg,.png"/>
+                <input class="btn btn-danger" type="submit" value="Get Tattoo Recs"/>
+            </form>
+            <div class="info-area">
+                <div class="img-area"></div>
+                <div class="status-area">
+                    <span class="status"></span>
+                </div>
+            </div>
+		    <img src={{img_upload}} alt="Input Tatoo" height="400" hspace="50" vspace="20"/>
+        </div>
+	</section>
+
+
+	<!-- image upload section end -->
+
+
 	<!-- portfolio section start -->
 	<section class="portfolio-section pt100">
 		<div class="container">
-			
-		</div>                       
+
+		</div>
 		<div class="container-fluid p-0">
 			<div class="row portfolios-area">
 				<div class="col-lg-6">
 					<div class="portfolio-intro">
-						<!-- TODO: Add in the input image controls here and possibly delete portfolio-filter controls -->
 						<ul class="portfolio-filter controls">
 							<li class="control" data-filter="all">All</li>
-							<li class="control" data-filter=".web">Web design</li>
-							<li class="control" data-filter=".digital">Digital design</li>
-							<li class="control" data-filter=".rened">3D Renedering</li>
-							<li class="control" data-filter=".brand">Brand Identity</li>
+							<li class="control" data-filter=".traditional">Traditional</li>
+							<li class="control" data-filter=".chicano">Chicano</li>
+							<li class="control" data-filter=".realism">Realism</li>
+							<li class="control" data-filter=".watercolor">Water Color</li>
+							<li class="control" data-filter=".tribal">Tribal</li>
 						</ul>
 					</div>
 				</div>
-				<div class="first-item col-md-6 col-lg-12 mix digital p-lg-0">
+<div class="pagebreak"> </div>
+				<div class="mix col-md-6 col-lg-3 mix digital p-lg-0">
 					<a href="../static/img/portfolio/1.jpg" class="portfolio-item set-bg " data-setbg="../static/img/portfolio/1.jpg">
 						<div class="pi-inner">
 							<h2>+ See Project</h2>
@@ -85,7 +107,7 @@
 						<p>Graphic design</p>
 					</div>
 				</div>
-				<div class="second-item mix col-md-6 web">
+				<div class="mix col-md-6 col-lg-3 web">
 					<a href="../static/img/portfolio/2.jpg" class="portfolio-item set-bg" data-setbg="../static/img/portfolio/2.jpg">
 						<div class="pi-inner">
 							<h2>+ See Project</h2>
@@ -131,50 +153,6 @@
 				</div>
 				<div class="mix col-md-6 col-lg-3 brand">
 					<a href="../static/img/portfolio/6.jpg" class="portfolio-item pi-style2 set-bg" data-setbg="../static/img/portfolio/6.jpg">
-						<div class="pi-inner">
-							<h2>+ See Project</h2>
-						</div>						
-					</a>
-					<div class="portfolio-meta">
-						<h2>Brand Campaign</h2>
-						<p>Graphic design</p>
-					</div>
-				</div>
-				<div class="mix col-md-6 col-lg-3 brand">
-					<a href="../static/img/portfolio/9.jpg" class="portfolio-item pi-style2 set-bg" data-setbg="../static/img/portfolio/9.jpg">
-						<div class="pi-inner">
-							<h2>+ See Project</h2>
-						</div>						
-					</a>
-					<div class="portfolio-meta">
-						<h2>Brand Identity for Company</h2>
-						<p>Graphic design</p>
-					</div>
-				</div>
-				<div class="mix col-md-6 col-lg-3 rened">
-					<a href="../static/img/portfolio/10.jpg" class="portfolio-item pi-style2 set-bg" data-setbg="../static/img/portfolio/10.jpg">
-						<div class="pi-inner">
-							<h2>+ See Project</h2>
-						</div>						
-					</a>
-					<div class="portfolio-meta">
-						<h2>Brand Campaign</h2>
-						<p>Graphic design</p>
-					</div>
-				</div>
-				<div class="mix col-md-6 col-lg-3 digital">
-					<a href="../static/img/portfolio/7.jpg" class="portfolio-item pi-style2 set-bg" data-setbg="../static/img/portfolio/7.jpg">
-						<div class="pi-inner">
-							<h2>+ See Project</h2>
-						</div>						
-					</a>
-					<div class="portfolio-meta">
-						<h2>A cup of tea please</h2>
-						<p>Graphic design</p>
-					</div>
-				</div>
-				<div class="mix col-md-6 col-lg-3 brand">
-					<a href="../static/img/portfolio/8.jpg" class="portfolio-item pi-style2 set-bg" data-setbg="../static/img/portfolio/8.jpg">
 						<div class="pi-inner">
 							<h2>+ See Project</h2>
 						</div>						
