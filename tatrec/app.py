@@ -1,6 +1,7 @@
 from flask import Flask
+from tatrec.config import path_web_upload_user
 
-UPLOAD_FOLDER = "static/img/uploads"
+UPLOAD_FOLDER = path_web_upload_user
 MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 
 # Create the application object

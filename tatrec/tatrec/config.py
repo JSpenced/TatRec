@@ -17,3 +17,12 @@ path_raw_chicago = path_data_raw / 'instagram/chicago/'
 path_train_chicago = path_data_proc / 'instagram/chicago/'
 path_cleaned_chicago = path_data_clean / 'chicago/'
 path_models_chicago = path_models / 'chicago/'
+
+# Web server paths
+path_web_data = 'static/data/'
+path_web_img = 'static/img/'
+path_web_upload = path_web_data + 'upload/'
+path_web_upload_user = path_web_upload + 'train/user/'
+path_web_cleaned_chicago = path_web_data + 'cleaned/chicago/'
+path_web_models = path_web_data + 'models/'
+path_web_models_chicago = path_web_cleaned_chicago + 'models/chicago/'
