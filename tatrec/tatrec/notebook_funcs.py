@@ -2,7 +2,10 @@ from fastai.vision import ImageList, imagenet_stats, get_transforms
 import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
+
+##################################################
 # Notebook helper functions
+##################################################
 
 
 def get_data_from_folder(path, bs, img_size, tfms=None, extensions=[".jpg"]):
@@ -43,7 +46,7 @@ def print_data_classes_size(data):
     print('Test dataset size: {0}'.format(len(data.valid_ds.x)))
 
 
-def plot_similar_tats(idx, feature_dict, lsh_variable, n_items=6, distance_func='hamming'):
+def plot_similar_tats_idx(idx, feature_dict, lsh_variable, n_items=6, distance_func='hamming'):
     """Takes an input index for the training set and plots the closest matching tattoos to that input
     tattoo.
 
