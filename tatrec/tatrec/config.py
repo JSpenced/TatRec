@@ -15,3 +15,5 @@ path_scripts = path_project / 'scripts'
 # City paths
 path_raw_chicago = path_data_raw / 'instagram/chicago/'
 path_train_chicago = path_data_proc / 'instagram/chicago/'
+path_cleaned_chicago = path_data_clean / 'chicago/'
+path_models_chicago = path_models / 'chicago/'
