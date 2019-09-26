@@ -39,7 +39,7 @@ def print_data_classes_size(data):
     print('Test dataset size: {0}'.format(len(data.valid_ds.x)))
 
 
-def plot_similar_tats(idx, feature_dict, lsh_variable, n_items=6):
+def plot_similar_tats(idx, feature_dict, lsh_variable, n_items=6, distance_func='hamming'):
     """Takes an input index for the training set and plots the closest matching tattoos to that input
     tattoo.
 
@@ -50,6 +50,9 @@ def plot_similar_tats(idx, feature_dict, lsh_variable, n_items=6):
     the final layer.
     lsh_variable : trained lsh model to query the input image
     n_items : number of items to return
+    distance_func : The distance function to be used. Currently it needs to be one of ("hamming",
+    "euclidean", "true_euclidean", "centred_euclidean", "cosine", "l1norm"). By default "hamming"
+    will used.
 
     Returns
     -------
@@ -57,7 +60,7 @@ def plot_similar_tats(idx, feature_dict, lsh_variable, n_items=6):
 
     """
     response = lsh_variable.query(feature_dict[list(feature_dict.keys())[idx]].flatten(),
-                                  num_results=n_items + 1, distance_func='hamming')
+                                  num_results=n_items + 1, distance_func=distance_func)
     columns = 3
     rows = int(np.ceil(n_items+1 / columns))
     fig = plt.figure(figsize=(2 * rows, 5 * rows))
