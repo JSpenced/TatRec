@@ -41,10 +41,9 @@ def get_tattoo_recs():
             img_rec3 = img_save_path
             img_rec4 = img_save_path
             img_rec5 = img_save_path
-            img_rec6 = img_save_path
             return render_template("index.html", img_upload=img_save_path, img_rec1=img_rec1,
                                    img_rec2=img_rec2, img_rec3=img_rec3, img_rec4=img_rec4,
-                                   img_rec5=img_rec5, img_rec6=img_rec6)
+                                   img_rec5=img_rec5)
     return
 
 
@@ -56,11 +55,10 @@ def home_page():
     img_rec3 = "../static/img/tattoos/chicano-tat3.jpg"
     img_rec4 = "../static/img/tattoos/chicano-tat4.jpg"
     img_rec5 = "../static/img/tattoos/chicano-tat5.jpg"
-    img_rec6 = "../static/img/tattoos/chicano-tat6.jpg"
 
     return render_template('index.html', img_upload=img_default, img_rec1=img_rec1,
                            img_rec2=img_rec2, img_rec3=img_rec3, img_rec4=img_rec4,
-                           img_rec5=img_rec5, img_rec6=img_rec6)
+                           img_rec5=img_rec5)
 
 
 # start the server with the 'run()' method
