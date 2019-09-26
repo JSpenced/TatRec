@@ -12,7 +12,7 @@ from .config import (path_web_models, path_web_cleaned_chicago, path_web_upload,
                      path_web_models_chicago, path_web_data)
 
 
-class TatRecognizer:
+class TatRecommender:
     def __init__(self):
         self.data = load_data(path_web_cleaned_chicago, "databunch-lsh.pkl")
         self.arch = models.resnet50

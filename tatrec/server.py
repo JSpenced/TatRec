@@ -2,12 +2,12 @@ from flask import render_template, request, flash, session
 from werkzeug.utils import secure_filename
 from app import app
 import os
-from tatrec.recognition import TatRecognizer
+from tatrec.recommender import TatRecommender
 from tatrec.config import path_web_img
 
 # Create paths to files
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
-tat_recognizer = TatRecognizer()
+tat_recognizer = TatRecommender()
 
 
 def allowed_file(filename):
