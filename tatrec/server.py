@@ -1,4 +1,4 @@
-from flask import render_template, request, flash
+from flask import render_template, request, flash, session
 from werkzeug.utils import secure_filename
 from app import app
 import os
@@ -25,13 +25,13 @@ def get_recs():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
-            # flash('No file part')
+            flash('No file part')
             return render_template("index.html")
         img_file = request.files['file']
         # if user does not select file, browser also
         # submit an empty part without filename
         if img_file.filename == '':
-            # flash('No selected file')
+            flash('No selected file')
             return render_template("index.html")
         if img_file and allowed_file(img_file.filename):
             filename = secure_filename(img_file.filename)
@@ -46,11 +46,17 @@ def get_recs():
                     print(e)
             img_file.save(os.path.join(img_full_path))
             img_paths = tat_recognizer.get_tattoo_recs()
-            img_rec1, img_rec2, img_rec3, img_rec4, img_rec5 = img_paths
-            return render_template("index.html", img_upload=img_full_path, img_rec1=img_rec1,
-                                   img_rec2=img_rec2, img_rec3=img_rec3, img_rec4=img_rec4,
-                                   img_rec5=img_rec5)
-    return
+            (session['img_rec1'], session['img_rec2'], session['img_rec3'], session['img_rec4'],
+             session['img_rec5']) = img_paths
+            session['img_full_path'] = img_full_path
+            return render_template("index.html", img_upload=img_full_path,
+                                   img_rec1=session['img_rec1'], img_rec2=session['img_rec2'],
+                                   img_rec3=session['img_rec3'], img_rec4=session['img_rec4'],
+                                   img_rec5=session['img_rec5'])
+    return render_template("index.html", img_upload=session['img_full_path'],
+                           img_rec1=session['img_rec1'], img_rec2=session['img_rec2'],
+                           img_rec3=session['img_rec3'], img_rec4=session['img_rec4'],
+                           img_rec5=session['img_rec5'])
 
 
 @app.route('/', methods=["GET", "POST"])
