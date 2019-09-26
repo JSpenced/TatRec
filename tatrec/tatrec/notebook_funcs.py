@@ -5,7 +5,7 @@ import numpy as np
 # Notebook helper functions
 
 
-def get_data_from_folder(path, bs, img_size, tfms=get_transforms(), extensions=[".jpg"]):
+def get_data_from_folder(path, bs, img_size, tfms=None, extensions=[".jpg"]):
     """Takes Imagenet style folder structure of test/train/valid and returns DataBunch with different
     batch and image sizes to train with PyTorch.
 
@@ -22,11 +22,15 @@ def get_data_from_folder(path, bs, img_size, tfms=get_transforms(), extensions=[
     data : DataBunch from fastai library for training images in PyTorch
 
     """
+    if tfms is None:
+        tfms = get_transforms()
+
     data = (ImageList.from_folder(path, extensions=extensions)
             .split_by_folder()
             .label_from_folder()
             .transform(tfms, size=img_size)
             .databunch(bs=bs, num_workers=0).normalize(imagenet_stats))
+
     return data
 
 
