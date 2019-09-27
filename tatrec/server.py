@@ -16,6 +16,9 @@ def allowed_file(filename):
 
 @app.route('/recommendations', methods=['GET', 'POST'])
 def get_recs():
+    """Return rendered web page with the recommended tattoo artists when a user clicks
+    `Get tattoo Recs`
+    """
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -55,6 +58,8 @@ def get_recs():
 
 @app.route('/', methods=["GET", "POST"])
 def home_page():
+    """Return rendered home page
+    """
     img_default = path_web_img + "tattoos/chicano-default.jpg"
     img_rec1 = path_web_img + "tattoos/chicano-tat1.jpg"
     img_rec2 = path_web_img + "tattoos/chicano-tat2.jpg"

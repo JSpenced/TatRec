@@ -8,12 +8,61 @@ from fastai.basic_data import load_data
 # Ensure tatrec package is in the path
 # sys.path.append(os.path.join(Path.cwd(), "..", "tatrec"))
 from .notebook_funcs import get_data_from_folder
-from .config import (path_web_models, path_web_cleaned_chicago, path_web_upload,
+from .config import (path_web_cleaned_chicago, path_web_upload,
                      path_web_models_chicago, path_web_data)
 
 
 class TatRecommender:
+    """
+    A class used to represent a tattoo recommendation engine.
+
+    ...
+
+    Attributes
+    ----------
+    data : DataBunch
+        data to be used in the learner for predictions
+    name : arch
+        CNN model architecture
+    sound : learn
+        CNN learner class
+    lsh : LSHash
+        lsh model to search similarities of stored database of images
+    n_items : int
+        number of items to return from lsh query
+    path_img_upload : PathOrStr
+        path to image upload on flask server
+    distance_func : str
+        distance function used for lsh query
+    lsh : LSHash
+        lsh model to search similarities of stored database of images
+
+    Methods
+    -------
+    get_tattoo_recs(path_img_upload=path_web_upload)
+        Gets the similar tattoo recommendations for the image in the upload folder
+    """
     def __init__(self):
+        """
+        Parameters
+        __________
+        data : DataBunch
+            data to be used in the learner for predictions
+        name : arch
+            CNN model architecture
+        sound : learn
+            CNN learner class
+        lsh : LSHash
+            lsh model to search similarities of stored database of images
+        n_items : int
+            number of items to return from lsh query
+        path_img_upload : PathOrStr
+            path to image upload on flask server
+        distance_func : str
+            distance function used for lsh query
+        lsh : LSHash
+            lsh model to search similarities of stored database of images
+        """
         self.data = load_data(path_web_cleaned_chicago, "databunch-lsh.pkl")
         self.arch = models.resnet50
         self.learn = cnn_learner(self.data, self.arch, metrics=error_rate)
@@ -23,10 +72,26 @@ class TatRecommender:
         self.n_items = 5
         self.path_img_upload = path_web_upload
         self.distance_func = 'hamming'
-        self.input_image = None
-        self.preds = None
 
     def get_tattoo_recs(self, path_img_upload=path_web_upload):
+        """Gets the similar tattoo recommendations for the image in the upload folder
+
+        Args
+        ----------
+        data : DataBunch
+            data to be used in the learner for predictions
+        name : arch
+            CNN model architecture
+        sound : learn
+            CNN learner class
+        lsh : LSHash
+            lsh model to search similarities of stored database of images
+
+        Returns
+        -------
+        img_paths : tuple
+            tuple of images paths that are the first self.n_items recommended images
+        """
         data = get_data_from_folder(path_img_upload, 1, 64)
         self.learn.data = data
         self.learn.get_preds(data.train_ds)[0]
@@ -38,7 +103,9 @@ class TatRecommender:
         img_rec3 = path_web_data + response[2][0][1][27:]
         img_rec4 = path_web_data + response[3][0][1][27:]
         img_rec5 = path_web_data + response[4][0][1][27:]
-        return (img_rec1, img_rec2, img_rec3, img_rec4, img_rec5)
+        #  FIXME Update this to work with n-items not first 5
+        img_paths = (img_rec1, img_rec2, img_rec3, img_rec4, img_rec5)
+        return img_paths
 
 
 class SaveFeatures():
