@@ -2,6 +2,7 @@ from flask import render_template, request, flash, session
 from werkzeug.utils import secure_filename
 from app import app
 import os
+from sys import platform
 from tatrec.recommender import TatRecommender
 from tatrec.config import path_web_img
 
@@ -73,4 +74,8 @@ def home_page():
 
 # start the server with the 'run()' method
 if __name__ == "__main__":
-    app.run(debug=True)  # will run locally http://127.0.0.1:5000/
+    # running on linux server need to change the host to 0.0.0.0
+    if platform == "linux" or platform == "linux2":
+        app.run(host="0.0.0.0", debug=True) # will run locally http://0.0.0.0:5000
+    elif platform == "darwin":
+        app.run(debug=True)  # will run locally http://127.0.0.1:5000/
