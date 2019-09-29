@@ -24,7 +24,18 @@
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-	
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <span>{{ message }}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 	<!-- header section start -->
 	<header class="header-section">
 		<div class="container-fluid">
@@ -44,7 +55,7 @@
 	<!-- image upload section start -->
 	<section class="image-section pt100">
         <div class="container">
-		<h5>Input a tattoo to match to artists with similar styles:</h5>
+		<h5>Input a tattoo and watch TatRec do its magic:</h5>
             <form method="post" enctype="multipart/form-data" action="recommendations">
                 <input class="btn btn-warning" id="img" name="file" type="file" accept=".jpeg,.jpg,.png"/>
                 <input class="btn btn-danger" type="submit" value="Get Tattoo Recs"/>
@@ -58,7 +69,6 @@
 		    <img src={{img_upload}} alt="Input Tatoo" height="400" hspace="50" vspace="20"/>
         </div>
 	</section>
-
 
 	<!-- image upload section end -->
 

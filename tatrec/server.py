@@ -16,6 +16,13 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+def get_index_page():
+    return render_template("index.html", img_upload=session['img_full_path'],
+                           img_rec1=session['img_rec1'], img_rec2=session['img_rec2'],
+                           img_rec3=session['img_rec3'], img_rec4=session['img_rec4'],
+                           img_rec5=session['img_rec5'])
+
+
 @app.route('/recommendations', methods=['GET', 'POST'])
 def get_recs():
     """Return rendered web page with the recommended tattoo artists when a user clicks
@@ -24,14 +31,14 @@ def get_recs():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
-            flash('No file part')
-            return render_template("index.html")
+            flash("No file part, file didn't get sent to server. Please retry.")
+            return get_index_page()
         img_file = request.files['file']
         # if user does not select file, browser also
         # submit an empty part without filename
         if img_file.filename == '':
-            flash('No selected file')
-            return render_template("index.html")
+            flash('No selected file, please select a file to get your recs!')
+            return get_index_page()
         if img_file and allowed_file(img_file.filename):
             filename = secure_filename(img_file.filename)
             img_folder_path = app.config['UPLOAD_FOLDER']
@@ -48,29 +55,21 @@ def get_recs():
             (session['img_rec1'], session['img_rec2'], session['img_rec3'], session['img_rec4'],
              session['img_rec5']) = img_paths
             session['img_full_path'] = img_full_path
-            return render_template("index.html", img_upload=img_full_path,
-                                   img_rec1=session['img_rec1'], img_rec2=session['img_rec2'],
-                                   img_rec3=session['img_rec3'], img_rec4=session['img_rec4'],
-                                   img_rec5=session['img_rec5'])
-    return render_template("index.html", img_upload=session['img_full_path'],
-                           img_rec1=session['img_rec1'], img_rec2=session['img_rec2'],
-                           img_rec3=session['img_rec3'], img_rec4=session['img_rec4'],
-                           img_rec5=session['img_rec5'])
+            return get_index_page()
+    return get_index_page()
 
 
 @app.route('/', methods=["GET", "POST"])
 def home_page():
     """Return rendered home page
     """
-    img_default = path_web_img + "tattoos/chicano-default.jpg"
-    img_rec1 = path_web_img + "tattoos/chicano-tat1.jpg"
-    img_rec2 = path_web_img + "tattoos/chicano-tat2.jpg"
-    img_rec3 = path_web_img + "tattoos/chicano-tat3.jpg"
-    img_rec4 = path_web_img + "tattoos/chicano-tat4.jpg"
-    img_rec5 = path_web_img + "tattoos/chicano-tat5.jpg"
-    return render_template('index.html', img_upload=img_default, img_rec1=img_rec1,
-                           img_rec2=img_rec2, img_rec3=img_rec3, img_rec4=img_rec4,
-                           img_rec5=img_rec5)
+    return get_index_page()
+
+
+@app.errorhandler(413)
+def request_entity_too_large(error):
+    flash('Max file size 2MB (reduce size or select a different file).')
+    return get_index_page(), 413
 
 
 # start the server with the 'run()' method
@@ -80,3 +79,9 @@ if __name__ == "__main__":
         app.run(host="0.0.0.0", debug=True)
     elif platform == "darwin":
         app.run(debug=True)  # will run locally http://127.0.0.1:5000/
+    session['img_full_path'] = path_web_img + "tattoos/chicano-default.jpg"
+    session['img_rec1'] = path_web_img + "tattoos/chicano-tat1.jpg"
+    session['img_rec2'] = path_web_img + "tattoos/chicano-tat2.jpg"
+    session['img_rec3'] = path_web_img + "tattoos/chicano-tat3.jpg"
+    session['img_rec4'] = path_web_img + "tattoos/chicano-tat4.jpg"
+    session['img_rec5'] = path_web_img + "tattoos/chicano-tat5.jpg"
