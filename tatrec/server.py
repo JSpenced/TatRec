@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from flask import render_template, request, flash, session
 from werkzeug.utils import secure_filename
 from app import app
@@ -76,6 +77,6 @@ def home_page():
 if __name__ == "__main__":
     # running on linux server need to change the host to 0.0.0.0
     if platform == "linux" or platform == "linux2":
-        app.run(host="0.0.0.0", debug=True) # will run locally http://0.0.0.0:5000
+        app.run(host="0.0.0.0", debug=True)
     elif platform == "darwin":
         app.run(debug=True)  # will run locally http://127.0.0.1:5000/
