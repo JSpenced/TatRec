@@ -1,4 +1,6 @@
 import pickle
+from pathlib import Path
+import os
 import numpy as np
 from fastai.metrics import error_rate
 from fastai.vision import cnn_learner
@@ -96,13 +98,30 @@ class TatRecommender:
         self.learn.data = data
         self.learn.get_preds(data.train_ds)[0]
         query = self.sf.features[-1].flatten()
-        response = self.lsh.query(query, num_results=self.n_items,
-                                  distance_func=self.distance_func)
-        img_rec1 = path_web_data + response[0][0][1][27:]
-        img_rec2 = path_web_data + response[1][0][1][27:]
-        img_rec3 = path_web_data + response[2][0][1][27:]
-        img_rec4 = path_web_data + response[3][0][1][27:]
-        img_rec5 = path_web_data + response[4][0][1][27:]
+        currentDirectory = Path(path_img_upload + 'train/user/')
+        currentPattern = "*.jpg"
+        in_dataset = False
+        for currentFile in currentDirectory.glob(currentPattern):
+            if os.path.basename(currentFile)[:14] == "tatrec--demo--":
+                in_dataset = True
+        if in_dataset:
+            response = self.lsh.query(query, num_results=self.n_items + 1,
+                                      distance_func=self.distance_func)
+            print("response length", len(response))
+            img_rec1 = path_web_data + response[1][0][1][27:]
+            img_rec2 = path_web_data + response[2][0][1][27:]
+            img_rec3 = path_web_data + response[3][0][1][27:]
+            img_rec4 = path_web_data + response[4][0][1][27:]
+            img_rec5 = path_web_data + response[5][0][1][27:]
+
+        else:
+            response = self.lsh.query(query, num_results=self.n_items,
+                                      distance_func=self.distance_func)
+            img_rec1 = path_web_data + response[0][0][1][27:]
+            img_rec2 = path_web_data + response[1][0][1][27:]
+            img_rec3 = path_web_data + response[2][0][1][27:]
+            img_rec4 = path_web_data + response[3][0][1][27:]
+            img_rec5 = path_web_data + response[4][0][1][27:]
         #  FIXME Update this to work with n-items not first 5
         img_paths = (img_rec1, img_rec2, img_rec3, img_rec4, img_rec5)
         return img_paths
