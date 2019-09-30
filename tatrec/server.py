@@ -8,7 +8,7 @@ from tatrec.recommender import TatRecommender
 from tatrec.config import path_web_img
 
 # Create paths to files
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
 tat_recognizer = TatRecommender()
 
 
@@ -50,6 +50,8 @@ def get_recs():
                         os.unlink(file_path)
                 except Exception as e:
                     print(e)
+            if img_full_path[-5:] == ".jpeg":
+                img_full_path = img_full_path[:-5] + ".jpg"
             img_file.save(os.path.join(img_full_path))
             img_paths = tat_recognizer.get_tattoo_recs()
             (session['img_rec1'], session['img_rec2'], session['img_rec3'], session['img_rec4'],
