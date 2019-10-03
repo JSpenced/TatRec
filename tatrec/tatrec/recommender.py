@@ -117,21 +117,19 @@ class TatRecommender:
         if in_dataset:
             response = self.lsh.query(query, num_results=self.n_items + 1,
                                       distance_func=self.distance_func)
-            print("response length", len(response))
-            img_rec1 = path_web_data + response[1][0][1][27:]
-            img_rec2 = path_web_data + response[2][0][1][27:]
-            img_rec3 = path_web_data + response[3][0][1][27:]
-            img_rec4 = path_web_data + response[4][0][1][27:]
-            img_rec5 = path_web_data + response[5][0][1][27:]
-
+            img_rec1 = path_web_data + response[1][0][1][27:-4]
+            img_rec2 = path_web_data + response[2][0][1][27:-4]
+            img_rec3 = path_web_data + response[3][0][1][27:-4]
+            img_rec4 = path_web_data + response[4][0][1][27:-4]
+            img_rec5 = path_web_data + response[5][0][1][27:-4]
         else:
             response = self.lsh.query(query, num_results=self.n_items,
                                       distance_func=self.distance_func)
-            img_rec1 = path_web_data + response[0][0][1][27:]
-            img_rec2 = path_web_data + response[1][0][1][27:]
-            img_rec3 = path_web_data + response[2][0][1][27:]
-            img_rec4 = path_web_data + response[3][0][1][27:]
-            img_rec5 = path_web_data + response[4][0][1][27:]
+            img_rec1 = path_web_data + response[0][0][1][27:-4]
+            img_rec2 = path_web_data + response[1][0][1][27:-4]
+            img_rec3 = path_web_data + response[2][0][1][27:-4]
+            img_rec4 = path_web_data + response[3][0][1][27:-4]
+            img_rec5 = path_web_data + response[4][0][1][27:-4]
         #  FIXME Update this to work with n-items not first 5
         img_paths = (img_rec1, img_rec2, img_rec3, img_rec4, img_rec5)
         return img_paths
