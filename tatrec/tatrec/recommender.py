@@ -1,6 +1,8 @@
 import pickle
 from pathlib import Path
+from typing import List
 import os
+import re
 import numpy as np
 from fastai.metrics import error_rate
 from fastai.vision import cnn_learner
@@ -12,6 +14,14 @@ from fastai.basic_data import load_data
 from .notebook_funcs import get_data_from_folder
 from .config import (path_web_cleaned_chicago, path_web_upload,
                      path_web_models_chicago, path_web_data)
+
+
+def caption_hashtags(self) -> List[str]:
+    """List of all lowercased hashtags (without preceeding #) that occur in the Post's caption."""
+    if not self.caption:
+        return []
+    hashtag_regex = re.compile(r"(?:#)(\w(?:(?:\w|(?:\.(?!\.))){0,28}(?:\w))?)")
+    return re.findall(hashtag_regex, self.caption.lower())
 
 
 class TatRecommender:
