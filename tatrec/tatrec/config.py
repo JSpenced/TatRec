@@ -9,8 +9,9 @@ path_data_proc = path_data / 'processed'
 path_data_raw = path_data / 'raw'
 path_data_clean = path_data / 'cleaned'
 path_train_cnn = path_data_proc / 'tat_notat'
-path_models = path_project / 'models'
 path_data_upload = path_data / 'upload'
+path_models = path_project / 'models'
+path_scripts = path_project / 'scripts'
 
 # City paths
 path_raw_chicago = path_data_raw / 'instagram/chicago/'
