@@ -3,6 +3,8 @@ from flask import render_template, request, flash, session
 from werkzeug.utils import secure_filename
 from app import app
 import os
+import json
+import lzma
 from sys import platform
 from tatrec.recommender import TatRecommender
 from tatrec.config import path_web_img
@@ -21,6 +23,11 @@ def get_index_page():
                            img_rec1=session['img_rec1'], img_rec2=session['img_rec2'],
                            img_rec3=session['img_rec3'], img_rec4=session['img_rec4'],
                            img_rec5=session['img_rec5'])
+def load_user_from_json(path):
+    with lzma.open(path + '.json.xz') as f:
+        js = json.load(f)
+        return (js['node']['owner']['username'], js['node']['owner']['edge_followed_by']['count'],
+                js['node']['edge_media_preview_like']['count'])
 
 
 @app.route('/recommendations', methods=['GET', 'POST'])
@@ -54,9 +61,13 @@ def get_recs():
                 img_full_path = img_full_path[:-5] + ".jpg"
             img_file.save(os.path.join(img_full_path))
             img_paths = tat_recognizer.get_tattoo_recs()
-            (session['img_rec1'], session['img_rec2'], session['img_rec3'], session['img_rec4'],
-             session['img_rec5']) = img_paths
             session['img_full_path'] = img_full_path
+            for i, path in enumerate(img_paths):
+                if path[-3:] == 'UTC':
+                    username, followers, likes = load_user_from_json(path)
+                else:
+                    username, followers, likes = load_user_from_json(path[:-2])
+                set_session_recs(i, username, followers, likes, img_paths[i] + ".jpg")
             return get_index_page()
     return get_index_page()
 
