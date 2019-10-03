@@ -22,12 +22,30 @@ def get_index_page():
     return render_template("index.html", img_upload=session['img_full_path'],
                            img_rec1=session['img_rec1'], img_rec2=session['img_rec2'],
                            img_rec3=session['img_rec3'], img_rec4=session['img_rec4'],
-                           img_rec5=session['img_rec5'])
+                           img_rec5=session['img_rec5'], user_rec1=session['user_rec1'],
+                           fols_rec1=session['fols_rec1'], user_rec2=session['user_rec2'],
+                           fols_rec2=session['fols_rec2'], user_rec3=session['user_rec3'],
+                           fols_rec3=session['fols_rec3'], user_rec4=session['user_rec4'],
+                           fols_rec4=session['fols_rec4'], user_rec5=session['user_rec5'],
+                           fols_rec5=session['fols_rec5'], likes_rec1=session['likes_rec1'],
+                           likes_rec2=session['likes_rec2'], likes_rec3=session['likes_rec3'],
+                           likes_rec4=session['likes_rec4'], likes_rec5=session['likes_rec5'] )
+
+
 def load_user_from_json(path):
     with lzma.open(path + '.json.xz') as f:
         js = json.load(f)
         return (js['node']['owner']['username'], js['node']['owner']['edge_followed_by']['count'],
                 js['node']['edge_media_preview_like']['count'])
+
+
+def set_session_recs(rec_num, username, followers, likes, img_path):
+    """ Set session variable for specific recommendation
+    """
+    session['user_rec' + str(rec_num+1)] = str(username)
+    session['fols_rec' + str(rec_num+1)] = str(followers)
+    session['likes_rec' + str(rec_num+1)] = str(likes)
+    session['img_rec' + str(rec_num+1)] = img_path
 
 
 @app.route('/recommendations', methods=['GET', 'POST'])
@@ -76,6 +94,13 @@ def get_recs():
 def home_page():
     """Return rendered home page
     """
+    session['img_full_path'] = path_web_img + "homepage/chicano-input.jpg"
+    likes = [1980, 2034, 2096, 1906, 2200]
+    username = "yz_asencio_art"
+    followers = 54019
+    img_path = path_web_img + "homepage/chicano-img"
+    for i in range(5):
+        set_session_recs(i, username, followers, likes[i], img_path + str(i+1) + ".jpg")
     return get_index_page()
 
 
@@ -92,9 +117,3 @@ if __name__ == "__main__":
         app.run(host="0.0.0.0", debug=True)
     elif platform == "darwin":
         app.run(debug=True)  # will run locally http://127.0.0.1:5000/
-    session['img_full_path'] = path_web_img + "tattoos/chicano-default.jpg"
-    session['img_rec1'] = path_web_img + "tattoos/chicano-tat1.jpg"
-    session['img_rec2'] = path_web_img + "tattoos/chicano-tat2.jpg"
-    session['img_rec3'] = path_web_img + "tattoos/chicano-tat3.jpg"
-    session['img_rec4'] = path_web_img + "tattoos/chicano-tat4.jpg"
-    session['img_rec5'] = path_web_img + "tattoos/chicano-tat5.jpg"
