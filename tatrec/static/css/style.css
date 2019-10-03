@@ -26,15 +26,6 @@ h6 {
   font-weight: 600;
   font-family: 'Josefin Sans', sans-serif;
 }
-a:visited {
-  color: darkgreen;
-}
-a:hover {
-  color: hotpink;
-}
-a:active {
-  color: red;
-}
 p {
   font-size: 18px;
   color: #979797;
@@ -91,6 +82,15 @@ ol {
 .section-title span {
   color: #979797;
 }
+
+.title-about {
+  font-size: 30px;
+}
+
+.title-about span {
+  color: #979797;
+}
+
 
 /*------------------------
   Common Elements
@@ -399,6 +399,10 @@ ol {
   margin-right: 0;
 }
 
+.header-btn a {
+  color: white;
+}
+
 .nav-switch {
   display: none;
 }
@@ -499,6 +503,19 @@ ol {
 .portfolio-meta a {
   font-size: 24px;
 }
+
+.portfolio-meta a:visited {
+  color: darkgreen;
+}
+
+.portfolio-meta a:hover {
+  color: hotpink;
+}
+
+.portfolio-meta a:active {
+  color: red;
+}
+
 
 .portfolio-meta p {
   font-size: 16px;
