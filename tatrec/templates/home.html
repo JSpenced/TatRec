@@ -19,11 +19,12 @@
 	<link rel="stylesheet" href="../static/css/style.css"/>
 
 </head>
-<body class="body-pad">
+<body>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
+
 {% with messages = get_flashed_messages() %}
     {% if messages %}
 	{% for message in messages %}
@@ -36,12 +37,24 @@
 	{% endfor %}
     {% endif %}
 {% endwith %}
+
 	<!-- header section start -->
 	<header class="header-section">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="logo">
-					<h1 class="site-logo">TatRec</h1>
+				<div class="col-lg-4 col-md-3">
+					<div class="logo">
+						<h1 class="site-logo">TatRec</h1>
+					</div>
+				</div>
+				<div class="col-lg-8 col-md-9">
+					<a href="" class="site-btn header-btn">Get in touch</a>
+					<nav class="main-menu">
+						<ul>
+							<li><a href="{{ url_for('home') }}">Home</a></li>
+							<li><a href="about.html">About</a></li>
+						</ul>
+					</nav>
 				</div>
 			</div>
 		</div>
