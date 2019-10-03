@@ -26,7 +26,15 @@ h6 {
   font-weight: 600;
   font-family: 'Josefin Sans', sans-serif;
 }
-
+a:visited {
+  color: darkgreen;
+}
+a:hover {
+  color: hotpink;
+}
+a:active {
+  color: red;
+}
 p {
   font-size: 18px;
   color: #979797;
@@ -162,7 +170,9 @@ ol {
   margin-right: 15px;
   z-index: 1;
 }
-
+.site-btn a {
+  color: white;
+}
 .site-btn.btn-fade {
   background-color: #979797;
 }
@@ -352,14 +362,19 @@ ol {
     Header Section
 --------------------------*/
 .header-section {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   position: relative;
 }
 
 .site-logo {
-  font-size: 24px;
-  padding-top: 20px;
+  font-size: 30px;
+  padding-top: 10px;
+  padding-bottom: 1px;
+}
+.site-tagline {
+  font-size: 12px;
+  padding-top: 2px;
 }
 
 .main-menu ul {
@@ -392,7 +407,7 @@ ol {
     Intro Section
 --------------------------*/
 .intro-section {
-  padding: 110px 0;
+  padding: 10px 0;
 }
 
 /*------------------------
@@ -441,6 +456,7 @@ ol {
   position: absolute;
   width: 100%;
   height: 100%;
+  font-size: medium;
   left: 0;
   top: 0;
   background: transparent;
@@ -480,8 +496,12 @@ ol {
   font-size: 24px;
 }
 
+.portfolio-meta a {
+  font-size: 24px;
+}
+
 .portfolio-meta p {
-  font-size: 14px;
+  font-size: 16px;
   color: #a6a6a6;
   margin-bottom: 0;
 }
@@ -683,7 +703,7 @@ ol {
 /* Medium screen : 992px. */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .portfolio-item {
-    height: 450px;
+    height: 350px;
   }
 }
 

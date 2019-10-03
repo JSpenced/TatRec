@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>TatRec - Tattoo Recommendation Engine</title>
+	<title>TatRec - Don't be a Dink, Get the Right Ink</title>
 	<meta charset="UTF-8">
 	<meta name="description" content="TatRec - Tattoo Recommendation Engine">
 	<meta name="keywords" content="tattoo, recommendation, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Favicon -->   
+	<!-- Favicon -->
 	<link href="../static/img/favicon.ico" rel="shortcut icon"/>
 
 	<!-- Google Fonts -->
@@ -26,14 +26,14 @@
 	</div>
 {% with messages = get_flashed_messages() %}
     {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                <span>{{ message }}</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endfor %}
+	{% for message in messages %}
+	    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+		<span>{{ message }}</span>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+		</button>
+	    </div>
+	{% endfor %}
     {% endif %}
 {% endwith %}
 	<!-- header section start -->
@@ -54,20 +54,20 @@
 
 	<!-- image upload section start -->
 	<section class="image-section pt100">
-        <div class="container">
+	<div class="container">
 		<h5>Input a tattoo and watch TatRec do its magic:</h5>
-            <form method="post" enctype="multipart/form-data" action="recommendations">
-                <input class="btn btn-warning" id="img" name="file" type="file" accept=".jpeg,.jpg"/>
-                <input class="btn btn-danger" type="submit" value="Get Tattoo Recs"/>
-            </form>
-            <div class="info-area">
-                <div class="img-area"></div>
-                <div class="status-area">
-                    <span class="status"></span>
-                </div>
-            </div>
+	    <form method="post" enctype="multipart/form-data" action="recommendations">
+		<input class="btn btn-warning" id="img" name="file" type="file" accept=".jpeg,.jpg"/>
+		<input class="btn btn-danger" type="submit" value="Get Tattoo Recs"/>
+	    </form>
+	    <div class="info-area">
+		<div class="img-area"></div>
+		<div class="status-area">
+		    <span class="status"></span>
+		</div>
+	    </div>
 		    <img src={{img_upload}} alt="Input Tatoo" height="400" hspace="50" vspace="20"/>
-        </div>
+	</div>
 	</section>
 
 	<!-- image upload section end -->
@@ -75,9 +75,6 @@
 
 	<!-- portfolio section start -->
 	<section class="portfolio-section pt100">
-		<div class="container">
-
-		</div>
 		<div class="container-fluid p-0">
 			<div class="row portfolios-area">
 				<div class="col-lg-6">
@@ -92,59 +89,59 @@
 						</ul>
 					</div>
 				</div>
-				<div class="mix col-md-6 col-lg-3 mix digital p-lg-0">
+				<div class="mix col-md-6 col-lg-3 mix digital">
 					<a href={{img_rec1}} class="portfolio-item set-bg " data-setbg={{img_rec1}}>
 						<div class="pi-inner">
-							<h2>+ See Project</h2>
-						</div>			
+							<h2>+ Enlarge tattoo image</h2>
+						</div>
 					</a>
 					<div class="portfolio-meta">
-						<h2>Brand Campaign</h2>
-						<p>Graphic design</p>
+						<a href={{"https://www.instagram.com/" ~ user_rec1}} target="_blank">{{"@" ~ user_rec1}}</a>
+						<p>Followers: {{fols_rec1}}  Likes: {{likes_rec1}}</p>
 					</div>
 				</div>
 				<div class="mix col-md-6 col-lg-3 web">
 					<a href={{img_rec2}} class="portfolio-item set-bg" data-setbg={{img_rec2}}>
 						<div class="pi-inner">
-							<h2>+ See Project</h2>
-						</div>						
+							<h2>+ Enlarge tattoo image</h2>
+						</div>
 					</a>
 					<div class="portfolio-meta">
-						<h2>Brand Identity for Company</h2>
-						<p>Graphic design</p>
+						<a href={{"https://www.instagram.com/" ~ user_rec2}} target="_blank">{{"@" ~ user_rec2}}</a>
+						<p>Followers: {{fols_rec2}}  Likes: {{likes_rec2}}</p>
 					</div>
 				</div>
 				<div class="mix col-md-6 col-lg-3 rened">
 					<a href={{img_rec3}} class="portfolio-item pi-style2 set-bg" data-setbg={{img_rec3}}>
 						<div class="pi-inner">
-							<h2>+ See Project</h2>
-						</div>						
+							<h2>+ Enlarge tattoo image</h2>
+						</div>
 					</a>
 					<div class="portfolio-meta">
-						<h2>Brand Campaign</h2>
-						<p>Graphic design</p>
+						<a href={{"https://www.instagram.com/" ~ user_rec3}} target="_blank">{{"@" ~ user_rec3}}</a>
+						<p>Followers: {{fols_rec3}}  Likes: {{likes_rec3}}</p>
 					</div>
 				</div>
 				<div class="mix col-md-6 col-lg-3 digital">
 					<a href={{img_rec4}} class="portfolio-item pi-style2 set-bg" data-setbg={{img_rec4}}>
 						<div class="pi-inner">
-							<h2>+ See Project</h2>
-						</div>						
+							<h2>+ Enlarge tattoo image</h2>
+						</div>
 					</a>
 					<div class="portfolio-meta">
-						<h2>Brand Campaign</h2>
-						<p>Graphic design</p>
+						<a href={{"https://www.instagram.com/" ~ user_rec4}} target="_blank">{{"@" ~ user_rec4}}</a>
+						<p>Followers: {{fols_rec4}}  Likes: {{likes_rec4}}</p>
 					</div>
 				</div>
 				<div class="mix col-md-6 col-lg-3 rened">
 					<a href={{img_rec5}} class="portfolio-item pi-style2 set-bg" data-setbg={{img_rec5}}>
 						<div class="pi-inner">
-							<h2>+ See Project</h2>
-						</div>						
+							<h2>+ Enlarge tattoo image</h2>
+						</div>
 					</a>
 					<div class="portfolio-meta">
-						<h2>A cup of tea please</h2>
-						<p>Graphic design</p>
+						<a href={{"https://www.instagram.com/" ~ user_rec5}} target="_blank">{{"@" ~ user_rec5}}</a>
+						<p>Followers: {{fols_rec5}}  Likes: {{likes_rec5}}</p>
 					</div>
 				</div>
 			</div>
@@ -161,9 +158,8 @@
 				<a href="https://www.linkedin.com/in/jdspen/"><span class="fa fa-linkedin"></span></a>
 				<a href="https://github.com/JSpenced/"><span class="fa fa-github"></span></a>
 			</div>
-			<div class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+			<div class="copyright">
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 </div>
 		</div>
 	</footer>
