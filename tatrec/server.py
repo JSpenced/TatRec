@@ -19,7 +19,7 @@ def allowed_file(filename):
 
 
 def get_index_page():
-    return render_template("index.html", img_upload=session['img_full_path'],
+    return render_template("home.html", img_upload=session['img_full_path'],
                            img_rec1=session['img_rec1'], img_rec2=session['img_rec2'],
                            img_rec3=session['img_rec3'], img_rec4=session['img_rec4'],
                            img_rec5=session['img_rec5'], user_rec1=session['user_rec1'],
@@ -102,6 +102,20 @@ def home_page():
     for i in range(5):
         set_session_recs(i, username, followers, likes[i], img_path + str(i+1) + ".jpg")
     return get_index_page()
+
+
+@app.route('/home', methods=["GET", "POST"])
+def home():
+    """Return the home page
+    """
+    return home_page()
+
+
+@app.route('/about', methods=["GET", "POST"])
+def about():
+    """Return the about me page
+    """
+    return render_template("about.html")
 
 
 @app.errorhandler(413)
