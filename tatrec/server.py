@@ -60,40 +60,47 @@ def delete_files_from_folder(path):
 
 
 @app.route('/recommendations', methods=['GET', 'POST'])
-def get_recs():
-    """Return rendered web page with the recommended tattoo artists when a user clicks
-    `Get tattoo Recs`
+def get_recs() -> Any:
+    """Return a rendered web page with the recommended tattoo artists when a user clicks
+    `Get Recs`.
+
+    Returns:
+        A string of the webpage to render.
+
     """
     if request.method == 'POST':
-        tat_dropdown = request.form.get('tatlist')
         # check if the post request has the file part
-        img_folder_path = app.config['UPLOAD_FOLDER']
-        if tat_dropdown == '':
-            if 'file' not in request.files:
-                flash("No file part, file didn't get sent to server. Please retry.")
-                return get_index_page()
+        if 'file' in request.files:
+            # get the tattoo demo dropdown list value
+            tat_dropdown = request.form.get('tatlist')
+            img_folder_path = app.config['UPLOAD_FOLDER']
             img_file = request.files['file']
-            # if user does not select file, browser also
-            # submit an empty part without filename
-            if img_file.filename == '':
-                flash('No selected file, please select a file to get your recs!')
+            # if user does not select file flahes an error
+            if img_file.filename == '' and tat_dropdown == '':
+                flash('No selected file or dropdown selection, please select a file to get your recs!')
                 return get_index_page()
             if img_file and allowed_file(img_file.filename):
+                # generates a web secure filename
                 filename = secure_filename(img_file.filename)
                 img_full_path = os.path.join(img_folder_path, filename)
                 delete_files_from_folder(img_folder_path)
-            if img_full_path[-5:] == ".jpeg":
-                img_full_path = img_full_path[:-5] + ".jpg"
-            img_file.save(os.path.join(img_full_path))
+                # model requires ".jpg" formatted files
+                if img_full_path[-5:] == ".jpeg":
+                    img_full_path = img_full_path[:-5] + ".jpg"
+                img_file.save(os.path.join(img_full_path))
+            # check if the dropdown menu was used
+            elif tat_dropdown != '':
+                delete_files_from_folder(img_folder_path)
+                img_name = 'tatrec--demo--' + tat_dropdown + '.jpg'
+                img_full_path = shutil.copy("./static/img/demo/" + img_name,
+                                            os.path.join(img_folder_path, img_name))
         else:
-            delete_files_from_folder(img_folder_path)
-            img_name = 'tatrec--demo--' + tat_dropdown + '.jpg'
-            print(os.path.join(img_folder_path, img_name))
-            img_full_path = shutil.copy("./static/img/demo/" + img_name,
-                                        os.path.join(img_folder_path, img_name))
-            print(img_full_path)
+            flash("There was an error with your selection, please retry!!")
+            return get_index_page()
+        # get image path of tattoo recommendations
         img_paths = tat_recognizer.get_tattoo_recs()
         session['img_full_path'] = img_full_path
+        # setup images, followers, usernames, and likes variables for html
         for i, path in enumerate(img_paths):
             if path[-3:] == 'UTC':
                 username, followers, likes = load_user_from_json(path)
