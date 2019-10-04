@@ -48,7 +48,7 @@
 					</div>
 				</div>
 				<div class="col-lg-8 col-md-9">
-					<a href="" class="site-btn header-btn">Get in touch</a>
+					<a href="mailto:jeffspencerd@gmail.com" class="site-btn header-btn">Get in touch</a>
 					<nav class="main-menu">
 						<ul>
 							<li><a href="{{ url_for('home') }}">Home</a></li>
@@ -87,11 +87,8 @@
 
 
 	<!-- portfolio section start -->
-	<section class="portfolio-section pt100">
-		<div class="container-fluid p-0">
-			<div class="row portfolios-area">
-				<div class="col-lg-6">
-					<div class="portfolio-intro">
+	<section class="portfolio-section">
+		<div class="container-fluid">
 						<ul class="portfolio-filter controls">
 							<li class="control" data-filter="all">All</li>
 							<li class="control" data-filter=".traditional">Traditional</li>
@@ -100,10 +97,11 @@
 							<li class="control" data-filter=".watercolor">Water Color</li>
 							<li class="control" data-filter=".tribal">Tribal</li>
 						</ul>
-					</div>
-				</div>
-				<div class="mix col-md-6 col-lg-3 mix digital">
-					<a href={{img_rec1}} class="portfolio-item set-bg " data-setbg={{img_rec1}}>
+		</div>
+		<div class="container-fluid p-0">
+			<div class="row portfolios-area">
+				<div class="mix col-md-5 col-lg-3 digital">
+					<a href={{img_rec1}} class="portfolio-item pi-style2 set-bg " data-setbg={{img_rec1}}>
 						<div class="pi-inner">
 							<h2>+ Enlarge tattoo image</h2>
 						</div>
@@ -113,8 +111,8 @@
 						<p>Followers: {{fols_rec1}}  Likes: {{likes_rec1}}</p>
 					</div>
 				</div>
-				<div class="mix col-md-6 col-lg-3 web">
-					<a href={{img_rec2}} class="portfolio-item set-bg" data-setbg={{img_rec2}}>
+				<div class="mix col-md-5 col-lg-3 web">
+					<a href={{img_rec2}} class="portfolio-item pi-style2 set-bg" data-setbg={{img_rec2}}>
 						<div class="pi-inner">
 							<h2>+ Enlarge tattoo image</h2>
 						</div>
@@ -124,7 +122,7 @@
 						<p>Followers: {{fols_rec2}}  Likes: {{likes_rec2}}</p>
 					</div>
 				</div>
-				<div class="mix col-md-6 col-lg-3 rened">
+				<div class="mix col-md-5 col-lg-3 rened">
 					<a href={{img_rec3}} class="portfolio-item pi-style2 set-bg" data-setbg={{img_rec3}}>
 						<div class="pi-inner">
 							<h2>+ Enlarge tattoo image</h2>
@@ -135,7 +133,7 @@
 						<p>Followers: {{fols_rec3}}  Likes: {{likes_rec3}}</p>
 					</div>
 				</div>
-				<div class="mix col-md-6 col-lg-3 digital">
+				<div class="mix col-md-5 col-lg-3 digital">
 					<a href={{img_rec4}} class="portfolio-item pi-style2 set-bg" data-setbg={{img_rec4}}>
 						<div class="pi-inner">
 							<h2>+ Enlarge tattoo image</h2>
@@ -146,7 +144,7 @@
 						<p>Followers: {{fols_rec4}}  Likes: {{likes_rec4}}</p>
 					</div>
 				</div>
-				<div class="mix col-md-6 col-lg-3 rened">
+				<div class="mix col-md-5 col-lg-3 rened">
 					<a href={{img_rec5}} class="portfolio-item pi-style2 set-bg" data-setbg={{img_rec5}}>
 						<div class="pi-inner">
 							<h2>+ Enlarge tattoo image</h2>
