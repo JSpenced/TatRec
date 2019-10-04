@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from flask import render_template, request, flash, session
 from werkzeug.utils import secure_filename
+from typing import Tuple, Any
 from app import app
 import os
 import shutil
@@ -15,11 +16,26 @@ ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
 tat_recognizer = TatRecommender()
 
 
-def allowed_file(filename):
+def allowed_file(filename: str) -> bool:
+    """Check if the file is in allowed extensions.
+
+    Args:
+        filename: a filename
+
+    Returns
+        True for file in allowed extensions, False otherwise.
+
+    """
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-def get_index_page():
+def get_index_page() -> Any:
+    """Render the default homepage.
+
+    Returns:
+        A rendered homepage template.
+
+    """
     return render_template("home.html", img_upload=session['img_full_path'],
                            img_rec1=session['img_rec1'], img_rec2=session['img_rec2'],
                            img_rec3=session['img_rec3'], img_rec4=session['img_rec4'],
@@ -33,15 +49,33 @@ def get_index_page():
                            likes_rec4=session['likes_rec4'], likes_rec5=session['likes_rec5'])
 
 
-def load_user_from_json(path):
+def load_user_from_json(path: str) -> Tuple[str, int, int]:
+    """Load a user's json file and extract username, followers, and likes.
+
+    Args:
+        path: full path to users json.xz file
+
+    Returns:
+        Username, followers, and post likes.
+
+    """
     with lzma.open(path + '.json.xz') as f:
         js = json.load(f)
         return (js['node']['owner']['username'], js['node']['owner']['edge_followed_by']['count'],
                 js['node']['edge_media_preview_like']['count'])
 
 
-def set_session_recs(rec_num, username, followers, likes, img_path):
-    """ Set session variable for specific recommendation
+def set_session_recs(rec_num: int, username: str, followers: int, likes: int,
+                     img_path: str) -> None:
+    """Set flask session variables for specific recommendations.
+
+    Args:
+        rec_num: the recommendation number 1 to n
+        username: instagram username
+        followers: number of instagram followers
+        likes: number of likes on post
+        img_path: path to image recommendation
+
     """
     session['user_rec' + str(rec_num+1)] = str(username)
     session['fols_rec' + str(rec_num+1)] = str(followers)
@@ -49,7 +83,13 @@ def set_session_recs(rec_num, username, followers, likes, img_path):
     session['img_rec' + str(rec_num+1)] = img_path
 
 
-def delete_files_from_folder(path):
+def delete_files_from_folder(path: str) -> None:
+    """Delete all files in a specified folder.
+
+    Args:
+        path: path to folder to delete files
+
+    """
     for the_file in os.listdir(path):
         file_path = os.path.join(path, the_file)
         try:
@@ -65,7 +105,7 @@ def get_recs() -> Any:
     `Get Recs`.
 
     Returns:
-        A string of the webpage to render.
+        A rendered recommendation webpage.
 
     """
     if request.method == 'POST':
@@ -112,8 +152,12 @@ def get_recs() -> Any:
 
 
 @app.route('/', methods=["GET", "POST"])
-def home_page():
-    """Return rendered home page
+def home_page() -> Any:
+    """Return the home page when website launched.
+
+    Returns:
+        Rendered homepage.
+
     """
     session['img_full_path'] = path_web_img + "homepage/chicano-input.jpg"
     likes = [1980, 2034, 2096, 1906, 2200]
@@ -126,21 +170,38 @@ def home_page():
 
 
 @app.route('/home', methods=["GET", "POST"])
-def home():
-    """Return the home page
+def home() -> Any:
+    """Return the home page on clicking home button.
+
+    Returns:
+        Rendered homepage.
+
     """
     return home_page()
 
 
 @app.route('/about', methods=["GET", "POST"])
-def about():
-    """Return the about me page
+def about() -> Any:
+    """Return the about me page.
+
+    Returns:
+        Rendered about me webpage.
+
     """
     return render_template("about.html")
 
 
 @app.errorhandler(413)
 def request_entity_too_large(error):
+    """Used to flash an error when the user inputs an image that is to large.
+
+    Args:
+        error: input error
+
+    Returns:
+        Rendered home page with popup file size error.
+
+    """
     flash('Max file size 2MB (reduce size or select a different file).')
     return get_index_page(), 413
 

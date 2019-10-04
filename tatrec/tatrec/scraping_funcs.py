@@ -5,6 +5,7 @@ from pathlib import Path
 from instaloader import Instaloader, Profile
 from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
+from typing import Union, List
 
 
 # Instagram related scraping functions
@@ -14,14 +15,10 @@ def scrape_instagram_profile_posts(session: Instaloader, profile: str, max_posts
     """Scrapes specified number of posts from an instagram profile and save in the current working
     directory.
 
-    Args
-    ----------
-    profile : instaloader Profile of specific public Instagram user id
-    number : maximum number of posts to extract (can have multiple images per post)
-
-    Returns
-    -------
-    None
+    Args:
+        session: Instaloader user session file
+        profile: Profile of specific public Instagram user id
+        number: maximum number of posts to extract (can have multiple images per post)
 
     """
     counter = 0
@@ -37,14 +34,10 @@ def scrape_instagram_hashtag_posts(session: Instaloader, hashtag: str, max_posts
     """Scrapes specified number of posts from an instagram profile and save in the current working
     directory.
 
-    Args
-    ----------
-    profile : instaloader Profile of specific public Instagram user id
-    number : maximum number of posts to extract (can have multiple images per post)
-
-    Returns
-    -------
-    None
+    Args:
+        session: Instaloader user session file
+        profile: Profile of specific public Instagram user id
+        number: maximum number of posts to extract (can have multiple images per post)
 
     """
     counter = 0
@@ -56,19 +49,17 @@ def scrape_instagram_hashtag_posts(session: Instaloader, hashtag: str, max_posts
             break
 
 
-def get_insta_creds(path, row=1):
+def get_insta_creds(path: Union[Path, str], row: int = 1):
     """Load instagram credentials from file to hide from repository. If multiple credentials in file,
     can select a row to extract (defaults to first row).
 
-    Args
-    ----------
-    path : path to instagram credentials
-    row : which row of the instagram credentials file to extract
+    Args:
+        path: path to instagram credentials
+        row: which row of the instagram credentials file to extract
 
-    Returns
-    -------
-    insta_user : Instagram username
-    insta_pass : Instagram password
+    Returns:
+        insta_user : Instagram username
+        insta_pass : Instagram password
 
     """
     with open(path) as csvfile:
@@ -81,14 +72,39 @@ def get_insta_creds(path, row=1):
         return insta_user, insta_pass
 
 
+def caption_hashtags(caption) -> List[str]:
+    """List of all lowercased hashtags (without preceeding #) that occur in the caption.
+
+    Args:
+        caption: caption from Instagram
+
+    Returns:
+        List of all hashtags in caption text
+
+    """
+    if not caption:
+        return []
+    hashtag_regex = re.compile(r"(?:#)(\w(?:(?:\w|(?:\.(?!\.))){0,28}(?:\w))?)")
+    return re.findall(hashtag_regex, caption.lower())
+
+
 # Web related scraping functions
 
 
 def scrape_web_images(url: str, save_dir: str = None, filename_prefix: str = "") -> None:
-    """
-    Scrapes all images from a single webpage and save in current directory.
-    Input the webpage url. Optionally, a directory to save the images and a
-    filename prefix.
+    """Scrapes all images from a single webpage and save in current directory. Input the webpage url.
+    Optionally, a directory to save the images and a filename prefix.
+
+    Args:
+        url: webpage url
+        save_dir: save directory for scraped images or default to current working dir
+        filename_prefix: Add a prefix to each image file
+
+
+    Returns:
+        insta_user : Instagram username
+        insta_pass : Instagram password
+
     """
 
     if save_dir is None:
@@ -116,7 +132,14 @@ def scrape_web_images(url: str, save_dir: str = None, filename_prefix: str = "")
 
 
 def extract_webpage_name(url: str) -> str:
-    """Return webpage name before .com/net/info or None
+    """Return webpage name with .com/net/info and www. removed.
+
+    Args:
+        url: webpage url
+
+    Returns:
+        Just the base webpage name.
+
     """
     match = re.search(r'//(?:www\.)?([\w\-]+)\.', url)
     if match is not None:

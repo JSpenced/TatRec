@@ -1,8 +1,6 @@
 import pickle
 from pathlib import Path
-from typing import List
 import os
-import re
 import numpy as np
 from fastai.metrics import error_rate
 from fastai.vision import cnn_learner
@@ -16,65 +14,25 @@ from .config import (path_web_cleaned_chicago, path_web_upload,
                      path_web_models_chicago, path_web_data)
 
 
-def caption_hashtags(self) -> List[str]:
-    """List of all lowercased hashtags (without preceeding #) that occur in the Post's caption."""
-    if not self.caption:
-        return []
-    hashtag_regex = re.compile(r"(?:#)(\w(?:(?:\w|(?:\.(?!\.))){0,28}(?:\w))?)")
-    return re.findall(hashtag_regex, self.caption.lower())
-
-
 class TatRecommender:
     """
     A class used to represent a tattoo recommendation engine.
 
-    ...
+    Attributes:
+        data: data to be used in the learner for predictions
+        name: CNN model architecture
+        sound: CNN learner class
+        lsh: lsh model to search similarities of stored database of images
+        n_items: number of items to return from lsh query
+        path_img_upload: path to image upload on flask server
+        distance_func: distance function used for lsh query
+        lsh: lsh model to search similarities of stored database of images
 
-    Attributes
-    ----------
-    data : DataBunch
-        data to be used in the learner for predictions
-    name : arch
-        CNN model architecture
-    sound : learn
-        CNN learner class
-    lsh : LSHash
-        lsh model to search similarities of stored database of images
-    n_items : int
-        number of items to return from lsh query
-    path_img_upload : PathOrStr
-        path to image upload on flask server
-    distance_func : str
-        distance function used for lsh query
-    lsh : LSHash
-        lsh model to search similarities of stored database of images
+    Methods:
+        get_tattoo_recs(path_img_upload=path_web_upload)
 
-    Methods
-    -------
-    get_tattoo_recs(path_img_upload=path_web_upload)
-        Gets the similar tattoo recommendations for the image in the upload folder
     """
     def __init__(self):
-        """
-        Parameters
-        __________
-        data : DataBunch
-            data to be used in the learner for predictions
-        name : arch
-            CNN model architecture
-        sound : learn
-            CNN learner class
-        lsh : LSHash
-            lsh model to search similarities of stored database of images
-        n_items : int
-            number of items to return from lsh query
-        path_img_upload : PathOrStr
-            path to image upload on flask server
-        distance_func : str
-            distance function used for lsh query
-        lsh : LSHash
-            lsh model to search similarities of stored database of images
-        """
         self.data = load_data(path_web_cleaned_chicago, "databunch-lsh.pkl")
         self.arch = models.resnet50
         self.learn = cnn_learner(self.data, self.arch, metrics=error_rate)
@@ -90,19 +48,12 @@ class TatRecommender:
 
         Args
         ----------
-        data : DataBunch
-            data to be used in the learner for predictions
-        name : arch
-            CNN model architecture
-        sound : learn
-            CNN learner class
-        lsh : LSHash
-            lsh model to search similarities of stored database of images
+        path_img_upload: path to the upload folder to use to train the input tattoo
 
         Returns
         -------
-        img_paths : tuple
-            tuple of images paths that are the first self.n_items recommended images
+        Tuple of images paths that are the first self.n_items recommended images.
+
         """
         data = get_data_from_folder(path_img_upload, 1, 64)
         self.learn.data = data
@@ -138,6 +89,15 @@ class TatRecommender:
 class SaveFeatures():
     """This is a hook (used for saving intermediate computations) used to extract before the last FC
     layer for use in similarity matching.
+
+    Attributes:
+        hook: the hook you want to grab data from
+        features: extracted features
+
+    Methods:
+        hook_fn(module, input, output)
+        remove()
+
     """
     features = None
 
