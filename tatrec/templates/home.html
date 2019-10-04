@@ -68,10 +68,25 @@
 	<!-- image upload section start -->
 	<section class="image-section pt100">
 	<div class="container">
-		<h5>Input a tattoo and watch TatRec do its magic:</h5>
-	    <form method="post" enctype="multipart/form-data" action="recommendations">
+		<div class="input-class">
+		<h5>Input a tattoo or select a test one in the drop-down then hit Get Recs:</h5>
+		</div>
+	    <form method="post" enctype="multipart/form-data" id="tatform" action="recommendations">
 		<input class="btn btn-warning" id="img" name="file" type="file" accept=".jpeg,.jpg"/>
-		<input class="btn btn-danger" type="submit" value="Get Tattoo Recs"/>
+		<input class="btn btn-danger" type="submit" value="Get Recs"/>
+	<div>
+	<select name="tatlist">
+		<option value="">--Choose a tattoo and press Get Recs--</option>
+		<option value="dog">Dog</option>
+		<option value="tiger">Tiger</option>
+		<option value="heart">Heart</option>
+		<option value="kingkong">King Kong</option>
+		<option value="rose">Rose</option>
+		<option value="flower">Flower</option>
+		<option value="clock">Clock</option>
+		<option value="angel">Angel</option>
+	</select>
+	</div>
 	    </form>
 	    <div class="info-area">
 		<div class="img-area"></div>

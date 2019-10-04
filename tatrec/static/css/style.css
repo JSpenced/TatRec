@@ -26,6 +26,7 @@ h6 {
   font-weight: 600;
   font-family: 'Josefin Sans', sans-serif;
 }
+
 p {
   font-size: 18px;
   color: #979797;
@@ -412,6 +413,10 @@ ol {
 --------------------------*/
 .intro-section {
   padding: 10px 0;
+}
+
+.input-class {
+  max-width: 340px;
 }
 
 /*------------------------
