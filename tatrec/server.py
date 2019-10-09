@@ -2,7 +2,7 @@
 from flask import render_template, request, flash, session
 from werkzeug.utils import secure_filename
 from typing import Tuple, Any
-from app import app
+from app import app, MAX_UPLOAD_SIZE
 import os
 import shutil
 import json
@@ -202,7 +202,7 @@ def request_entity_too_large(error):
         Rendered home page with popup file size error.
 
     """
-    flash('Max file size 2MB (reduce size or select a different file).')
+    flash('Max file size ' + str(MAX_UPLOAD_SIZE) + 'MB (reduce size or select a different file).')
     return get_index_page(), 413
 
 
