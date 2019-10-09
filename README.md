@@ -69,7 +69,7 @@ The first image under __*Get Recs*__ is the input tattoo and the four tattoos at
 
 ### Video ###
 
-![Video of screen cast](tatrec/static/img/tatrec_screencast1.gif)  
+![Video of screen cast](tatrec/static/img/tatrec_screencast.gif)  
 
 ## Next Steps ##
 
