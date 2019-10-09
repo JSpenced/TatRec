@@ -1,7 +1,6 @@
 # TatRec #
 
-A tattoo artist recommendation web app ([www.tatrec.xyz](http://www.tatrec.xyz)). The app simplifies the process of finding local tattoo artists that specialize in the style and content of your desired tattoo. You simply put in an image of your favorite tattoo or a tattoo similar to one that you want to get, and TatRec recommends local tattoo artists that have done similar tattoos.
-
+A tattoo artist recommendation web app ([www.tatrec.xyz](http://www.tatrec.xyz)). The app simplifies the process of finding local tattoo artists that specialize in the style and content of your desired tattoo. You simply put in an image of your favorite tattoo or a tattoo similar to one that you want to get, and TatRec recommends local tattoo artists that have done similar tattoos.  
 <img src="tatrec/static/img/tatrec_screenshot.png" width="600">
 
 ### Contents ###
@@ -82,4 +81,4 @@ The first image under __*Get Recs*__ is the input tattoo and the four tattoos at
 
 [Slides](http://bit.ly/30VKjgB)  
 [Website](http://www.tatrec.xyz)  
-[Demo Video](https://www.youtube.com)
+[Demo Video](https://youtu.be/2BRBcs8JVos)
