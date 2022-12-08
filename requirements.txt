@@ -2,7 +2,7 @@ asn1crypto==0.24.0
 beautifulsoup4==4.8.0
 bitarray==1.0.1
 Bottleneck==1.2.1
-certifi==2019.6.16
+certifi==2022.12.7
 cffi==1.12.3
 chardet==3.0.4
 Click==7.0
